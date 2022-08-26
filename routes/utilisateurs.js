@@ -87,6 +87,9 @@ router.post('/',validate , (req,res)=> {
     .catch(err => console.log(err))
 })
 
+// api/utilisateur 
+
+// Update 
 router.put('/:_id',(req,res) =>{
   const idUser = req.params._id
 
@@ -113,7 +116,22 @@ router.put('/:_id',(req,res) =>{
 
 })
 
+// api/utilisateur 
 
+//Delete
+
+router.delete('/:_id',(req,res) => {
+  const idUser = req.params._id
+
+  Utilisateur.findByIdAndRemove(idUser)
+  .then(result => {
+    res.send({
+        message : 'Utilisateur supprimé avec succès !', 
+        data : result
+    })
+})
+  .catch(err => console.log(err))
+})
 
 
 module.exports = router;
