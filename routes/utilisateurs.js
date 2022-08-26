@@ -22,8 +22,15 @@ const validate = [
   check('tel')
   .isNumeric().withMessage('doit avoir que des chiffres')
   .isLength({min : 8 , max : 8})
-  .withMessage('le tel doit contenir 8 chiffres ! ')
-
+  .withMessage('le tel doit contenir 8 chiffres ! '),
+  check('cp')
+  .isNumeric().withMessage('doit avoir que des chiffres')
+  .isLength({min : 5 , max : 5})
+  .withMessage('le Code Postale doit contenir 5 chiffres ! '),
+  // check('adresse')
+  // .isNumeric().withMessage('doit avoir que des chiffres')
+  // .isLength({min : 5 , max : 5})
+  // .withMessage('le Code Postale doit contenir 5 chiffres ! ')
 
 
 ]
@@ -79,6 +86,33 @@ router.post('/',validate , (req,res)=> {
     })
     .catch(err => console.log(err))
 })
+
+router.put('/:_id',(req,res) =>{
+  const idUser = req.params._id
+
+  Utilisateur.findById(idUser)
+    .then(utilisateur => {
+       utilisateur.nom = req.body.nom;
+        utilisateur.prenom = req.body.prenom;
+        utilisateur.email = req.body.email;
+        utilisateur.mdp = req.body.mdp;
+        utilisateur.tel = req.body.tel;
+        utilisateur.adresse = req.body.adresse;
+        utilisateur.sexe = req.body.sexe;
+        utilisateur.cp = req.body.cp;
+
+        return utilisateur.save();
+    })
+    .then(result => {
+      res.send({
+          message : 'Utilisateur modifié avec succès !', 
+          data : result
+      })
+  })
+    .catch(err => console.log(err))
+
+})
+
 
 
 
