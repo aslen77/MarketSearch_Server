@@ -27,8 +27,8 @@ const validate = [
   .isNumeric().withMessage('doit avoir que des chiffres')
   .isLength({min : 5 , max : 5})
   .withMessage('le Code Postale doit contenir 5 chiffres ! '),
-  check('adresse')
-  .withMessage('ladresse postale doit contenir minimum 5 chiffres ! ')
+  // check('adresse')
+  // .withMessage('ladresse postale doit contenir minimum 5 chiffres ! ')
 
 
 ]
