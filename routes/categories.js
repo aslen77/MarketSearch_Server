@@ -31,7 +31,9 @@ router.get("/:_id", (req, res) => {
   router.post('/', (req,res)=> {
     const categorie = new Categorie({
         nom_categorie : req.body.nom_categorie,
-        image_path : req.body.image_path
+        image_path : req.body.image_path,
+        sous_categorie : req.body.sous_categorie
+
       
     });
 
