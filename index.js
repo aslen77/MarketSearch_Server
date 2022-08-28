@@ -6,6 +6,7 @@ require('dotenv').config()
 const utilisateurs = require('./routes/utilisateurs')
 const produits = require('./routes/produits')
 const administrateurs = require('./routes/administrateurs')
+const categories = require('./routes/categories')
 app.use(express.json())
 
 
@@ -16,6 +17,7 @@ app.get('/', (req,res)=> {
 app.use('/api/utilisateurs',utilisateurs)
 app.use('/api/produits',produits)
 app.use('/api/admins',administrateurs)
+app.use('/api/categories',categories)
 
 mongoose.connect('mongodb+srv://Arfaoui_Chayma:adminadmin@cluster0.b38myqm.mongodb.net/MarketSearch?retryWrites=true&w=majority')
     .then(result => {
