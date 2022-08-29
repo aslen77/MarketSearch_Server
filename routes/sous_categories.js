@@ -3,25 +3,25 @@ const express = require("express")
 
 const router = express.Router(); 
 
-const Categorie = require('../models/Categories')
+const Scategorie = require('../models/SousCategorie')
 
 
 
 //api/categories
 // SELECT GET
 router.get("/", (req, res) => {
-    Categorie.find()
-      .then((Categorie) => {
-        res.send(Categorie);
+    Scategorie.find()
+      .then((Scategorie) => {
+        res.send(Scategorie);
       })
       .catch((err) => console.log(err));
   });
 //SELECT GET BY ID 
 router.get("/:_id", (req, res) => {
-    const idCategorie = req.params._id
-    Categorie.findById(idCategorie)
-      .then((Categorie) => {
-        res.send(Categorie);
+    const idScategorie = req.params._id
+    Scategorie.findById(idScategorie)
+      .then((Scategorie) => {
+        res.send(Scategorie);
       })
       .catch((err) => console.log(err));
   });
@@ -29,17 +29,18 @@ router.get("/:_id", (req, res) => {
 
   //POST
   router.post('/', (req,res)=> {
-    const categorie = new Categorie({
-        nom_categorie : req.body.nom_categorie,
+    const scategorie = new Scategorie({
+        nom_scategorie : req.body.nom_scategorie,
         image_path : req.body.image_path,
+        _idCategorie : req.body._idCategorie,
 
       
     });
 
-    categorie.save()
+    scategorie.save()
     .then(result => {
         res.send({
-            message : 'categorie cree avec succees', 
+            message : 'sous categorie cree avec succees', 
             data :   result
         })
     })
@@ -49,12 +50,12 @@ router.get("/:_id", (req, res) => {
 //Delete
 
 router.delete('/:_id',(req,res) => {
-    const idCategorie = req.params._id
+    const idScategorie = req.params._id
   
-    Categorie.findByIdAndRemove(idCategorie)
+    Scategorie.findByIdAndRemove(idScategorie)
     .then(result => {
       res.send({
-          message : 'Categorie supprimé avec succès !', 
+          message : 'sous categorie supprimé avec succès !', 
           data : result
       })
   })

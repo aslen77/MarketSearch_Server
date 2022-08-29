@@ -7,6 +7,7 @@ const utilisateurs = require('./routes/utilisateurs')
 const produits = require('./routes/produits')
 const administrateurs = require('./routes/administrateurs')
 const categories = require('./routes/categories')
+const scategories = require('./routes/sous_categories')
 app.use(express.json())
 
 
@@ -18,6 +19,7 @@ app.use('/api/utilisateurs',utilisateurs)
 app.use('/api/produits',produits)
 app.use('/api/admins',administrateurs)
 app.use('/api/categories',categories)
+app.use('/api/sous_categories',scategories)
 
 mongoose.connect('mongodb+srv://Arfaoui_Chayma:adminadmin@cluster0.b38myqm.mongodb.net/MarketSearch?retryWrites=true&w=majority')
     .then(result => {
