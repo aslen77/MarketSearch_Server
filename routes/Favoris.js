@@ -55,8 +55,8 @@ router.get("/:idUser", (req, res) => {
 
 router.delete('/:_id',(req,res) => {
     const idFavoris = req.params._id
-    idFavoris
-    Favoris.findByIdAndRemove(idProduit)
+      
+    Favoris.findByIdAndRemove(idFavoris)
     .then(result => {
       res.send({
           message : 'Produit supprimé avec succès !', 
