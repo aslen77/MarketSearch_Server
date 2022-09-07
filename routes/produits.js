@@ -41,6 +41,7 @@ router.get("/:_id", (req, res) => {
         nom_utilisateur : req.body.nom_utilisateur,
         prenom_utilisateur : req.body.prenom_utilisateur,
         tel_contact : req.body.tel_contact,
+        critere : req.body.critere
     });
 
     produit.save()
