@@ -10,6 +10,8 @@ const administrateurs = require('./routes/administrateurs')
 const categories = require('./routes/categories')
 const scategories = require('./routes/sous_categories')
 const favoris = require('./routes/Favoris')
+// const upload = require("./routes/upload")
+const upload = require("./routes/images")
 app.use(express.json())
 
 
@@ -24,6 +26,7 @@ app.use('/api/categories', categories)
 app.use('/api/sous_categories', scategories)
 app.use('/api/favoris', favoris)
 app.use('/api/vendeurs', vendeurs)
+app.use('/api', upload)
 
 mongoose.connect('mongodb+srv://Arfaoui_Chayma:adminadmin@cluster0.b38myqm.mongodb.net/MarketSearch?retryWrites=true&w=majority')
     .then(result => {
