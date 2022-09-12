@@ -14,6 +14,8 @@ const scategories = require('./routes/sous_categories')
 const favoris = require('./routes/Favoris')
 // const upload = require("./routes/upload")
 const upload = require("./routes/images")
+app.use(express.json())
+
 app.use(express.static('uploads'));
 
 // app.use('/api/images', express.static(path.join(__dirname,"uplaods")));

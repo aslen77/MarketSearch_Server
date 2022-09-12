@@ -35,7 +35,7 @@ router.get("/:_id", (req, res) => {
         categorie : req.body.categorie,
         sous_categorie : req.body.sous_categorie,
         description : req.body.description,
-        image_path : req.body.image_path,
+        image : req.body.image,
         prix : req.body.prix,
         date_publication : req.body.date_publication,
         nom_utilisateur : req.body.nom_utilisateur,

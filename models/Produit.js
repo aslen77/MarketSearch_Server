@@ -6,7 +6,10 @@ const ProduitSchema = new mongoose.Schema({
    categorie : String ,
    sous_categorie : String ,
    description : String,
-   image_path : {type : String, required : true},
+   image : {
+      nom : String, 
+      image_path : String
+   },
    prix : Number, 
    date_publication : {type : Date , default : Date}, 
    nom_utilisateur : String,
