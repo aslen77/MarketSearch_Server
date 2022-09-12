@@ -1,6 +1,8 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const app = express()
+const path = require('path')
+
 require('dotenv').config()
 
 const utilisateurs = require('./routes/utilisateurs')
@@ -12,8 +14,9 @@ const scategories = require('./routes/sous_categories')
 const favoris = require('./routes/Favoris')
 // const upload = require("./routes/upload")
 const upload = require("./routes/images")
-app.use(express.json())
+app.use(express.static('uploads'));
 
+// app.use('/api/images', express.static(path.join(__dirname,"uplaods")));
 
 app.get('/', (req, res) => {
     res.send('Welcome to the app marketSearch')
