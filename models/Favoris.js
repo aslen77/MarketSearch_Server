@@ -5,7 +5,7 @@ const FavorisSchema = new mongoose.Schema({
    _idUtilisateur : {type : String},
    nomUtilisateur : {type : String},
    titre : {type : String, required : true},
-   path_image : {type : String, required : true},
+   refImage : {type : String, required : true},
    prix : Number
      
     

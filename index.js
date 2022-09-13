@@ -11,14 +11,11 @@ const produits = require('./routes/produits')
 const administrateurs = require('./routes/administrateurs')
 const categories = require('./routes/categories')
 const scategories = require('./routes/sous_categories')
-const favoris = require('./routes/Favoris')
-// const upload = require("./routes/upload")
+const favoris = require('./routes/favoris')
 const upload = require("./routes/images")
 app.use(express.json())
 
 app.use(express.static('uploads'));
-
-// app.use('/api/images', express.static(path.join(__dirname,"uplaods")));
 
 app.get('/', (req, res) => {
     res.send('Welcome to the app marketSearch')

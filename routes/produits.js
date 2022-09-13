@@ -6,6 +6,23 @@ const router = express.Router();
 const Produit = require('../models/Produit')
 
 
+const Image = require('../models/Image')
+const app = express()
+
+const path = require('path')
+const fs = require('fs');
+
+const multer = require("multer");
+
+const storage = multer.diskStorage({
+    destination: "uploads",
+    filename: (req, file, cb) => {
+      cb(null,file.originalname);
+    }
+  });
+
+const upload = multer({storage : storage}).single("image")
+
 
 //api/produits
 // SELECT GET
@@ -29,18 +46,20 @@ router.get("/:_id", (req, res) => {
 
   //POST
   router.post('/', (req,res)=> {
+    upload(req,res,(err) => {
+    
     const produit = new Produit({
         _idUtilisateur : req.body._idUtilisateur,
+        imageRef : req.body.imageRef,
         titre : req.body.titre,
         categorie : req.body.categorie,
         sous_categorie : req.body.sous_categorie,
         description : req.body.description,
-        image : req.body.image,
         prix : req.body.prix,
         date_publication : req.body.date_publication,
         nom_utilisateur : req.body.nom_utilisateur,
         prenom_utilisateur : req.body.prenom_utilisateur,
-        tel_contact : req.body.tel_contact,
+        telephone : req.body.telephone,
         critere : req.body.critere
     });
 
@@ -53,6 +72,7 @@ router.get("/:_id", (req, res) => {
     })
     .catch(err => console.log(err))
 })
+  })
 
 
 

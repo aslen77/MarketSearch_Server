@@ -17,11 +17,11 @@ const storage = multer.diskStorage({
     }
   });
 
-const upload = multer({storage : storage}).single("image_path")
+const upload = multer({storage : storage}).single("image")
 
 
 
-
+// afficher tous les images pour l'accueil
 router.get("/upload/", (req, res) => {
   Image.find()
   .then((Image) => {
@@ -33,6 +33,11 @@ router.get("/upload/", (req, res) => {
 });
 
 
+//afficher tous les images par utilisateur
+
+//afficher une image par references produit 
+
+
 router.post("/upload/",(req, res) => {
     upload(req,res,(err) => {
         if (err) {
@@ -40,6 +45,7 @@ router.post("/upload/",(req, res) => {
         }
         else {
             const newImage = new Image({
+              refProduit : req.body.refProduit,
                 nom : req.body.nom,
                 image : req.file.filename,
                 

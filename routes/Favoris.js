@@ -33,7 +33,7 @@ router.post('/', (req, res) => {
         _idUtilisateur: req.body._idUtilisateur,
         nomUtilisateur: req.body.nomUtilisateur,
         titre: req.body.titre,
-        path_image: req.body.path_image,
+        refImage: req.body.refImage,
         prix: req.body.prix,
 
     });
