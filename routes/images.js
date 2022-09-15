@@ -37,7 +37,12 @@ router.get("/upload/", (req, res) => {
 
 //afficher une image par references produit 
 
-
+Image.ensureIndexes(function(err) {
+  if (err)
+      console.log('impossible de saisir deux fois la meme image dans le meme produit');
+  else
+      console.log('create image index successfully');
+});
 router.post("/upload/",(req, res) => {
     upload(req,res,(err) => {
         if (err) {

@@ -49,7 +49,7 @@ router.get("/:_id", (req, res) => {
     upload(req,res,(err) => {
     
     const produit = new Produit({
-        _idUtilisateur : req.body._idUtilisateur,
+      id_vendeur : req.body.id_vendeur,
         imageRef : req.body.imageRef,
         titre : req.body.titre,
         categorie : req.body.categorie,
@@ -57,8 +57,8 @@ router.get("/:_id", (req, res) => {
         description : req.body.description,
         prix : req.body.prix,
         date_publication : req.body.date_publication,
-        nom_utilisateur : req.body.nom_utilisateur,
-        prenom_utilisateur : req.body.prenom_utilisateur,
+        nom_vendeur : req.body.nom_vendeur,
+        prenom_vendeur : req.body.prenom_vendeur,
         telephone : req.body.telephone,
         critere : req.body.critere
     });

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const ProduitSchema = new mongoose.Schema({
-   _idUtilisateur : {type : String, required : true},
+   id_vendeur : {type : String, required : true},
    titre : {type : String , required : true},
    categorie : String ,
    sous_categorie : String ,
@@ -9,8 +9,8 @@ const ProduitSchema = new mongoose.Schema({
    imageRef : String,
    prix : Number, 
    date_publication : {type : Date , default : Date}, 
-   nom_utilisateurr : String,
-   prenom_utilisateur : String,
+   nom_vendeur : String,
+   prenom_vendeur : String,
    tel_contact : Number,
    critere : {
       vetement : {
