@@ -33,16 +33,10 @@ router.get("/upload/", (req, res) => {
 });
 
 
-//afficher tous les images par utilisateur
+// afficher tous les images par vendeur
 
-//afficher une image par references produit 
+// afficher une image par references produit 
 
-Image.ensureIndexes(function(err) {
-  if (err)
-      console.log('impossible de saisir deux fois la meme image dans le meme produit');
-  else
-      console.log('create image index successfully');
-});
 router.post("/upload/",(req, res) => {
     upload(req,res,(err) => {
         if (err) {
@@ -53,6 +47,7 @@ router.post("/upload/",(req, res) => {
               refProduit : req.body.refProduit,
                 nom : req.body.nom,
                 image : req.file.filename,
+                id_vendeur : req.body.id_vendeur
                 
             })
             newImage

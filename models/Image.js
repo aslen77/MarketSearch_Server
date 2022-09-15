@@ -9,6 +9,10 @@ const ImageSchema = new mongoose.Schema({
   image: {
     type: String,
   },
+  id_vendeur :{
+    type : String, 
+    required:true  
+  }
 });
 
 module.exports = mongoose.model("Image", ImageSchema);
