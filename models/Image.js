@@ -12,6 +12,10 @@ const ImageSchema = new mongoose.Schema({
   id_vendeur :{
     type : String, 
     required:true  
+  }, 
+  isFavoris : {
+    type: Boolean, 
+    required : false
   }
 });
 

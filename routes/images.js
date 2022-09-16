@@ -35,8 +35,30 @@ router.get("/upload/", (req, res) => {
 
 // afficher tous les images par vendeur
 
-// afficher une image par references produit 
+router.get("/upload/vendeurPr/:id_vendeur", (req, res) => {
+  const id_vendeur = req.params.id_vendeur;
+  Image.find({id_vendeur : id_vendeur})
+  .then((Image) => {
+    res.send(Image);
+ 
+})
+.catch((err) => console.log(err));
+  
+});
 
+// afficher une image par references produit 
+router.get("/upload/refPr/:refProduit", (req, res) => {
+  const refProduit = req.params.refProduit;
+  Image.find({refProduit : refProduit})
+  .then((Image) => {
+    res.send(Image);
+ 
+})
+.catch((err) => console.log(err));
+  
+});
+
+// post images
 router.post("/upload/",(req, res) => {
     upload(req,res,(err) => {
         if (err) {
@@ -47,7 +69,8 @@ router.post("/upload/",(req, res) => {
               refProduit : req.body.refProduit,
                 nom : req.body.nom,
                 image : req.file.filename,
-                id_vendeur : req.body.id_vendeur
+                id_vendeur : req.body.id_vendeur,
+                isFavoris : req.body.isFavoris
                 
             })
             newImage
