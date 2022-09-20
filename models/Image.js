@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 
 const ImageSchema = new mongoose.Schema({
-  refProduit : {type : String , required : true },
   nom: {
     type: String,
     required: true,
@@ -16,7 +15,8 @@ const ImageSchema = new mongoose.Schema({
   isFavoris : {
     type: Boolean, 
     required : false
-  }
+  }, 
+  codejnt: String
 });
 
 module.exports = mongoose.model("Image", ImageSchema);

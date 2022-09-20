@@ -6,7 +6,7 @@ const ProduitSchema = new mongoose.Schema({
    categorie : String ,
    sous_categorie : String ,
    description : String,
-   imageRef : String,
+   codejnt : String,
    prix : Number, 
    date_publication : {type : Date , default : Date}, 
    nom_vendeur : String,

@@ -14,6 +14,8 @@ const fs = require('fs');
 
 const multer = require("multer");
 
+const CodeGenerator = require('node-code-generator')
+
 const storage = multer.diskStorage({
     destination: "uploads",
     filename: (req, file, cb) => {
@@ -23,7 +25,13 @@ const storage = multer.diskStorage({
 
 const upload = multer({storage : storage}).single("image")
 
+const generator = new CodeGenerator();
+var pattern = '*+CD*+92*+81*+66*+382*+';
+var howMany = 10000;
+// var options = alphanumericChars;
+var codes = generator.generateCodes(pattern, howMany);
 
+// console.log('generator = ' , codes[0]);
 //api/produits
 // SELECT GET
 router.get("/", (req, res) => {
@@ -46,11 +54,12 @@ router.get("/:_id", (req, res) => {
 
   //POST
   router.post('/', (req,res)=> {
+    var codes = generator.generateCodes(pattern, howMany);
+
     upload(req,res,(err) => {
     
     const produit = new Produit({
       id_vendeur : req.body.id_vendeur,
-        imageRef : req.body.imageRef,
         titre : req.body.titre,
         categorie : req.body.categorie,
         sous_categorie : req.body.sous_categorie,
@@ -60,7 +69,9 @@ router.get("/:_id", (req, res) => {
         nom_vendeur : req.body.nom_vendeur,
         prenom_vendeur : req.body.prenom_vendeur,
         telephone : req.body.telephone,
-        critere : req.body.critere
+        critere : req.body.critere,
+        codejnt : codes[0],
+
     });
 
     produit.save()

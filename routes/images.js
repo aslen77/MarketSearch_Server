@@ -46,17 +46,7 @@ router.get("/upload/vendeurPr/:id_vendeur", (req, res) => {
   
 });
 
-// afficher une image par references produit 
-router.get("/upload/refPr/:refProduit", (req, res) => {
-  const refProduit = req.params.refProduit;
-  Image.find({refProduit : refProduit})
-  .then((Image) => {
-    res.send(Image);
- 
-})
-.catch((err) => console.log(err));
-  
-});
+
 
 // post images
 router.post("/upload/",(req, res) => {
@@ -66,11 +56,11 @@ router.post("/upload/",(req, res) => {
         }
         else {
             const newImage = new Image({
-              refProduit : req.body.refProduit,
                 nom : req.body.nom,
                 image : req.file.filename,
                 id_vendeur : req.body.id_vendeur,
-                isFavoris : req.body.isFavoris
+                isFavoris : req.body.isFavoris,
+                codejnt : req.body.codejnt
                 
             })
             newImage
