@@ -2,6 +2,7 @@ const { application } = require("express");
 const express = require('express')
 
 const Image = require('../models/Image')
+const Produit = require('../models/Produit')
 const app = express()
 
 const path = require('path')
@@ -55,6 +56,7 @@ router.post("/upload/",(req, res) => {
             console.log(err)
         }
         else {
+          
             const newImage = new Image({
                 nom : req.body.nom,
                 image : req.file.filename,
