@@ -4,7 +4,7 @@ const express = require("express")
 const router = express.Router(); 
 
 const Produit = require('../models/Produit')
-
+const Favoris = require('../models/Favoris')
 
 const Image = require('../models/Image')
 const app = express()
@@ -51,8 +51,8 @@ router.get("/:_id", (req, res) => {
       })
       .catch((err) => console.log(err));
   });
-
-  // AGGREGATION WITHOUT MATCH 
+ 
+  // AGGREGATION WITHOUT MATCH ( all vendeur accueil)
   router.get("/aggreg/produit", (req, res) => {
     Produit.aggregate(([{$lookup: {
       from: "images",
@@ -67,7 +67,7 @@ router.get("/:_id", (req, res) => {
   .catch((err) => console.log(err))
   });
 
-  // AGGREGATION WITH MATCH 
+  // AGGREGATION WITH MATCH PAR REFERENCE PRODUIT (Details Produit)
   router.get("/aggreg/produit/:_id", (req, res) => {
     const _id = req.params._id
     Produit.aggregate(([{$lookup: {
@@ -82,6 +82,23 @@ router.get("/:_id", (req, res) => {
   })
   .catch((err) => console.log(err))
   });
+
+  // AGGREGATION WITH MATCH BY ID VENDEUR (MES PRODUITS)
+  router.get("/aggreg/produit/v/:id_vendeur", (req, res) => {
+    const id_vendeur = req.params.id_vendeur
+    Produit.aggregate(([{$lookup: {
+      from: "images",
+      localField: "codejnt",
+      foreignField: "codejnt",
+      as: "details_jointure",
+  }
+},  {$match: { id_vendeur : id_vendeur}}]))
+  .then((Produit) => { 
+      res.send(Produit)
+  })
+  .catch((err) => console.log(err))
+  });
+
   //POST
   router.post('/', (req,res)=> {
     var codes = generator.generateCodes(pattern, howMany);
@@ -115,8 +132,31 @@ router.get("/:_id", (req, res) => {
 })
   })
 
+// Ajouter Favoris product in Favoris collection 
+router.post('/favoris', (req,res)=> {
+  var codes = generator.generateCodes(pattern, howMany);
 
+  upload(req,res,(err) => {
+  
+  const favoris = new Favoris({
+    _idUtilisateur: req.body._idUtilisateur,
+    nomUtilisateur: req.body.nomUtilisateur,
+    titre: req.body.titre,
+    codejnt: req.body.codejnt,
+    prix: req.body.prix,
 
+  });
+
+  favoris.save()
+  .then(result => {
+      res.send({
+          message : 'Produit ajouter avec succees dans mes favoris ! ', 
+          data :   result
+      })
+  })
+  .catch(err => console.log(err))
+})
+})
 
 //Delete
 

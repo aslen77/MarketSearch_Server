@@ -27,29 +27,37 @@ router.get("/:_idUtilisateur", (req, res) => {
         .catch((err) => console.log(err));
 });
 
-//POST
-router.post('/', (req, res) => {
-    const favoris = new Favoris({
-        _idUtilisateur: req.body._idUtilisateur,
-        nomUtilisateur: req.body.nomUtilisateur,
-        titre: req.body.titre,
-        refImage: req.body.refImage,
-        prix: req.body.prix,
 
-    });
+ // AGGREGATION WITHOUT MATCH ( all mes favoris)
+ router.get("/aggreg/favoris", (req, res) => {
+    Favoris.aggregate(([{$lookup: {
+      from: "images",
+      localField: "codejnt",
+      foreignField: "codejnt",
+      as: "details_jointure",
+  }
+}]))
+  .then((Favoris) => { 
+      res.send(Favoris)
+  })
+  .catch((err) => console.log(err))
+  });
 
-    favoris.save()
-        .then(result => {
-            res.send({
-                message: 'Produit cree avec succees',
-                data: result
-            })
-        })
-        .catch(err => console.log(err))
-})
-
-
-
+  // AGGREGATION WITH MATCH PAR REFERENCE FAVORIS (Details Favoris)
+  router.get("/aggreg/favoris/:_id", (req, res) => {
+    const _id = req.params._id
+    Favoris.aggregate(([{$lookup: {
+      from: "images",
+      localField: "codejnt",
+      foreignField: "codejnt",
+      as: "details_jointure",
+  }
+},  {$match: { $expr : { $eq: [ '$_id' , { $toObjectId: _id}]}}}]))
+  .then((Favoris) => { 
+      res.send(Favoris)
+  })
+  .catch((err) => console.log(err))
+  });
 
 //Delete
 
