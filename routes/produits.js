@@ -52,6 +52,36 @@ router.get("/:_id", (req, res) => {
       .catch((err) => console.log(err));
   });
 
+  // AGGREGATION WITHOUT MATCH 
+  router.get("/aggreg/produit", (req, res) => {
+    Produit.aggregate(([{$lookup: {
+      from: "images",
+      localField: "codejnt",
+      foreignField: "codejnt",
+      as: "details_jointure",
+  }
+}]))
+  .then((Produit) => { 
+      res.send(Produit)
+  })
+  .catch((err) => console.log(err))
+  });
+
+  // AGGREGATION WITH MATCH 
+  router.get("/aggreg/produit/:_id", (req, res) => {
+    const _id = req.params._id
+    Produit.aggregate(([{$lookup: {
+      from: "images",
+      localField: "codejnt",
+      foreignField: "codejnt",
+      as: "details_jointure",
+  }
+},  {$match: { $expr : { $eq: [ '$_id' , { $toObjectId: _id}]}}}]))
+  .then((Produit) => { 
+      res.send(Produit)
+  })
+  .catch((err) => console.log(err))
+  });
   //POST
   router.post('/', (req,res)=> {
     var codes = generator.generateCodes(pattern, howMany);
