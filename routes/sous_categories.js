@@ -5,6 +5,19 @@ const router = express.Router();
 
 const Scategorie = require('../models/SousCategorie')
 
+const app = express()
+
+const path = require('path')
+const fs = require('fs');
+
+const multer = require("multer");
+const storage = multer.diskStorage({
+  destination: "cliparts",
+  filename: (req, file, cb) => {
+    cb(null,file.originalname);
+  }
+});
+const upload = multer({storage : storage}).single("clipart")
 
 
 //api/categories
@@ -29,12 +42,15 @@ router.get("/:_id", (req, res) => {
 
   //POST
   router.post('/', (req,res)=> {
+    upload(req,res,(err) => {
+      if (err) {
+          console.log(err)
+      }
+      else {
     const scategorie = new Scategorie({
         nom_scategorie : req.body.nom_scategorie,
-        image_path : req.body.image_path,
+        clipart : req.file.filename,
         _idCategorie : req.body._idCategorie,
-
-      
     });
 
     scategorie.save()
@@ -45,6 +61,8 @@ router.get("/:_id", (req, res) => {
         })
     })
     .catch(err => console.log(err))
+  }
+})
 })
 
 //Delete
