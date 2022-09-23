@@ -5,7 +5,19 @@ const router = express.Router();
 
 const Categorie = require('../models/Categories')
 
+const app = express()
 
+const path = require('path')
+const fs = require('fs');
+
+const multer = require("multer");
+const storage = multer.diskStorage({
+  destination: "cliparts",
+  filename: (req, file, cb) => {
+    cb(null,file.originalname);
+  }
+});
+const upload = multer({storage : storage}).single("clipart")
 
 //api/categories
 // SELECT GET
@@ -29,11 +41,15 @@ router.get("/:_id", (req, res) => {
 
   //POST
   router.post('/', (req,res)=> {
+    upload(req,res,(err) => {
+      if (err) {
+          console.log(err)
+      }
+      else {
     const categorie = new Categorie({
         nom_categorie : req.body.nom_categorie,
-        image_path : req.body.image_path,
+        clipart : req.file.filename,
 
-      
     });
 
     categorie.save()
@@ -44,6 +60,8 @@ router.get("/:_id", (req, res) => {
         })
     })
     .catch(err => console.log(err))
+  }
+})
 })
 
 //Delete
