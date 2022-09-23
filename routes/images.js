@@ -72,6 +72,22 @@ router.post("/upload/",(req, res) => {
         }
     })
   });
+  router.delete('/upload/:codejnt',(req,res) => { 
 
+    const codeJnt = req.params.codejnt;
+    
+    Image.remove({codejnt : codeJnt})
+      .then(result => { 
+        res.send(result)
+      })
+      .catch(err => console.log(err))
+  })
+  router.delete('/upload',(req,res) => { 
+    Image.remove({})
+      .then(result => { 
+        res.send(result)
+      })
+      .catch(err => console.log(err))
+  })
 
 module.exports = router;

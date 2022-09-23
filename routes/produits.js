@@ -155,5 +155,11 @@ router.delete('/:_id',(req,res) => {
   })
     .catch(err => console.log(err))
   })
-
+  router.delete('/',(req,res) => { 
+    Produit.remove({})
+      .then(result => { 
+        res.send(result)
+      })
+      .catch(err => console.log(err))
+  })
 module.exports = router;
