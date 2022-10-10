@@ -72,6 +72,8 @@ router.post("/upload/",(req, res) => {
         }
     })
   });
+
+  // delete when i delete product by id automatiqully 2 request after
   router.delete('/upload/:codejnt',(req,res) => { 
 
     const codeJnt = req.params.codejnt;

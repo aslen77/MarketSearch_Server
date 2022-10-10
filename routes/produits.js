@@ -98,7 +98,7 @@ router.get("/:_id", (req, res) => {
         date_publication : req.body.date_publication,
         nom_vendeur : req.body.nom_vendeur,
         prenom_vendeur : req.body.prenom_vendeur,
-        telephone : req.body.telephone,
+        tel_contact : req.body.tel_contact,
         critere : req.body.critere,
         codejnt : codes[0],
 

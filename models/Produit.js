@@ -11,7 +11,7 @@ const ProduitSchema = new mongoose.Schema({
    date_publication : {type : Date , default : Date}, 
    nom_vendeur : String,
    prenom_vendeur : String,
-   tel_contact : Number,
+   tel_contact : String,
    critere : {
       vetement : {
          typeVet : String, 
