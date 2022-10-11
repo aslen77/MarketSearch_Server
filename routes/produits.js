@@ -8,7 +8,7 @@ const Favoris = require('../models/Favoris')
 
 const Image = require('../models/Image')
 moment.locale("fr");
-const dateNow = moment().format('L');
+const dateNow = moment().format('LL');
 const CodeGenerator = require('node-code-generator')
 
 
