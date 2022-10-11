@@ -8,7 +8,7 @@ const ProduitSchema = new mongoose.Schema({
    description : String,
    codejnt : String,
    prix : Number, 
-   date_publication : {type : Date , default : Date}, 
+   date_publication : String, 
    nom_vendeur : String,
    prenom_vendeur : String,
    tel_contact : String,

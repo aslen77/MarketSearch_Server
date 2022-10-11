@@ -1,15 +1,14 @@
 const { application } = require("express");
 const express = require("express")
-
+const moment = require("moment")
 const router = express.Router(); 
 
 const Produit = require('../models/Produit')
 const Favoris = require('../models/Favoris')
 
 const Image = require('../models/Image')
-
-
-
+moment.locale("fr");
+const dateNow = moment().format('L');
 const CodeGenerator = require('node-code-generator')
 
 
@@ -84,7 +83,7 @@ router.get("/:_id", (req, res) => {
   })
   .catch((err) => console.log(err))
   });
-
+  
   //POST
   router.post('/', (req,res)=> {
     var codes = generator.generateCodes(pattern, howMany);
@@ -95,7 +94,7 @@ router.get("/:_id", (req, res) => {
         sous_categorie : req.body.sous_categorie,
         description : req.body.description,
         prix : req.body.prix,
-        date_publication : req.body.date_publication,
+        date_publication : dateNow,
         nom_vendeur : req.body.nom_vendeur,
         prenom_vendeur : req.body.prenom_vendeur,
         tel_contact : req.body.tel_contact,
