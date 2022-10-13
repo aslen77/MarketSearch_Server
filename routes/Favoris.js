@@ -59,6 +59,24 @@ router.get("/:_idUtilisateur", (req, res) => {
   .catch((err) => console.log(err))
   });
 
+
+  // AGGREGATION WITH MATCH PAR ID UTILISATEUR OU ID VENDEUR 
+  router.get("/aggreg/fav/:_idUtilisateur", (req, res) => {
+    const _idUtilisateur = req.params._idUtilisateur;
+    Favoris.aggregate(([{$lookup: {
+      from: "images",
+      localField: "codejnt",
+      foreignField: "codejnt",
+      as: "details_jointure",
+  }
+},  {$match: { _idUtilisateur : _idUtilisateur}}]))
+  .then((Favoris) => { 
+      res.send(Favoris)
+  })
+  .catch((err) => console.log(err))
+  });
+
+
 //Delete
 
 router.delete('/:_id', (req, res) => {

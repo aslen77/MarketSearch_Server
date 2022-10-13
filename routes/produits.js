@@ -116,13 +116,12 @@ router.get("/:_id", (req, res) => {
 
 // Ajouter Favoris product in Favoris collection 
 router.post('/favoris', (req,res)=> {
-  var codes = generator.generateCodes(pattern, howMany);
 
-  upload(req,res,(err) => {
   
   const favoris = new Favoris({
     _idUtilisateur: req.body._idUtilisateur,
     nomUtilisateur: req.body.nomUtilisateur,
+    prenomUtilisateur: req.body.prenomUtilisateur,
     titre: req.body.titre,
     codejnt: req.body.codejnt,
     prix: req.body.prix,
@@ -137,7 +136,7 @@ router.post('/favoris', (req,res)=> {
       })
   })
   .catch(err => console.log(err))
-})
+
 })
 
 //Delete
