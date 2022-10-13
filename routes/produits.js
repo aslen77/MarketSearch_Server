@@ -125,6 +125,12 @@ router.post('/favoris', (req,res)=> {
     titre: req.body.titre,
     codejnt: req.body.codejnt,
     prix: req.body.prix,
+    categorie : req.body.categorie,
+    sous_categorie : req.body.sous_categorie,
+    description : req.body.description,
+    date_publication : req.body.date_publication,
+    tel_contact : req.body.tel_contact,
+
 
   });
 

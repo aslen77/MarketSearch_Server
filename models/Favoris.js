@@ -7,8 +7,12 @@ const FavorisSchema = new mongoose.Schema({
    prenomUtilisateur :{type:String},
    titre : {type : String, required : true},
    codejnt : {type : String, required : true},
-   prix : Number
-     
+   prix : Number,
+   categorie : String ,
+   sous_categorie : String ,
+   description : String,
+   tel_contact : String,
+   date_publication : String 
     
 })
 
