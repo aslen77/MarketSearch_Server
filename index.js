@@ -15,7 +15,7 @@ const scategories = require('./routes/sous_categories')
 const favoris = require('./routes/favoris')
 const upload = require("./routes/images")
 
-app.use(cors())
+app.use(cors());
 app.use(express.json())
 
 app.use(express.static('uploads'));
