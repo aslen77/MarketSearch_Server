@@ -32,11 +32,10 @@ app.use('/api/sous_categories', scategories)
 app.use('/api/favoris', favoris)
 app.use('/api/vendeurs', vendeurs)
 app.use('/api', upload)
-
+const port = process.env.PORT || 3000
 mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.b38myqm.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`)
     .then(result => {
-        app.listen(process.env.PORT, () => console.log(`Server is running on port ${port}`))
+        app.listen(port, () => console.log(`Server is running on port ${port}`))
     })
     .catch(err => console.log('err'))
 
-const port = process.env.PORT || 3000
