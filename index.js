@@ -1,9 +1,10 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const app = express()
+const cors = require('cors')
 const path = require('path')
 
-require('dotenv').config()
+require('dotenv').config();
 
 const utilisateurs = require('./routes/utilisateurs')
 const vendeurs = require('./routes/vendeurs')
@@ -13,6 +14,8 @@ const categories = require('./routes/categories')
 const scategories = require('./routes/sous_categories')
 const favoris = require('./routes/favoris')
 const upload = require("./routes/images")
+
+app.use(cors())
 app.use(express.json())
 
 app.use(express.static('uploads'));
@@ -30,7 +33,9 @@ app.use('/api/favoris', favoris)
 app.use('/api/vendeurs', vendeurs)
 app.use('/api', upload)
 
-mongoose.connect('mongodb+srv://Arfaoui_Chayma:adminadmin@cluster0.b38myqm.mongodb.net/MarketSearch?retryWrites=true&w=majority')
+mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.b38myqm.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`,{
+    useUnifiedTopology : true, useNewUrlParser : true
+})
     .then(result => {
         app.listen(port, () => console.log(`Server is running on port ${port}`))
     })
