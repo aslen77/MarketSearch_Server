@@ -33,9 +33,7 @@ app.use('/api/favoris', favoris)
 app.use('/api/vendeurs', vendeurs)
 app.use('/api', upload)
 
-mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.b38myqm.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`,{
-    useUnifiedTopology : true, useNewUrlParser : true
-})
+mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.b38myqm.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`)
     .then(result => {
         app.listen(port, () => console.log(`Server is running on port ${port}`))
     })
