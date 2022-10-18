@@ -11,7 +11,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "nodemon": "^2.0.20"
+    "nodemon": "^2.0.19"
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -24,6 +24,6 @@
     "node-code-generator": "^1.0.3"
   },
   "engines": {
-    "node": "16.15.0"
+    "node": "14.10.1"
   }
 }

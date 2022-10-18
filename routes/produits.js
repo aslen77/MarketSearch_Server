@@ -83,6 +83,23 @@ router.get("/:_id", (req, res) => {
   })
   .catch((err) => console.log(err))
   });
+
+
+   // AGGREGATION WITH MATCH BY sous categorie
+   router.get("/aggreg/produit/sctg/:sous_categorie", (req, res) => {
+    const sous_categorie = req.params.sous_categorie
+    Produit.aggregate(([{$lookup: {
+      from: "images",
+      localField: "codejnt",
+      foreignField: "codejnt",
+      as: "details_jointure",
+  }
+},  {$match: { sous_categorie : sous_categorie}}]))
+  .then((Produit) => { 
+      res.send(Produit)
+  })
+  .catch((err) => console.log(err))
+  });
   
   //POST
   router.post('/', (req,res)=> {
