@@ -25,6 +25,6 @@
     "node-code-generator": "^1.0.3"
   },
   "engines": {
-    "node": "6.11.1"
+    "node": "14.19.0"
   }
 }
