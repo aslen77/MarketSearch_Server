@@ -22,15 +22,6 @@ app.get('/', (req, res) => {
     res.send('Welcome to the app marketSearch')
 })
 
-    
-          
-            
-    
-
-          
-    
-    
-  
 app.use('/api/utilisateurs', utilisateurs)
 app.use('/api/produits', produits)
 app.use('/api/admins', administrateurs)
