@@ -101,6 +101,22 @@ router.get("/:_id", (req, res) => {
   .catch((err) => console.log(err))
   });
   
+
+    // AGGREGATION WITH MATCH BY Titre
+    router.get("/aggreg/produit/findProduct/:titre", (req, res) => {
+      const titre = req.params.titre
+      Produit.aggregate(([{$lookup: {
+        from: "images",
+        localField: "codejnt",
+        foreignField: "codejnt",
+        as: "details_jointure",
+    }
+  },  {$match: { titre : titre}}]))
+    .then((Produit) => { 
+        res.send(Produit)
+    })
+    .catch((err) => console.log(err))
+    });
   //POST
   router.post('/', (req,res)=> {
     var codes = generator.generateCodes(pattern, howMany);
