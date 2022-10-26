@@ -1,0 +1,1 @@
+{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_"},{"v":{"$numberInt":"2"},"key":{"sous_categorie._id":{"$numberInt":"1"}},"name":"Unq_categories__id","sparse":true}],"uuid":"d24070cae00049c88c2ca3f811d01791","collectionName":"categories","type":"collection"}
