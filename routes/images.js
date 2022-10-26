@@ -21,7 +21,7 @@ const storage = multer.diskStorage({
 const upload = multer({storage : storage}).single("image")
 
 
-
+//
 // afficher tous les images pour l'accueil
 router.get("/upload/", (req, res) => {
   Image.find()
