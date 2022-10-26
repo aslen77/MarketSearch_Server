@@ -8,15 +8,32 @@ const app = express()
 const path = require('path')
 const router = express.Router();
 const fs = require('fs');
+const cloudinary = require("cloudinary").v2;
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
 
 const multer = require("multer");
 
-const storage = multer.diskStorage({
-    destination: "uploads",
-    filename: (req, file, cb) => {
-      cb(null,file.originalname);
-    }
-  });
+
+cloudinary.config({
+  cloud_name: "drd94tfnw",
+  api_key: "317625455142781",
+  api_secret: "S1ry3yZPsNJDYO6oqpEawcEV4RU",
+});
+
+
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: "MarketSearch_Image",
+  },
+});
+
+// const storage = multer.diskStorage({
+//     destination: "uploads",
+//     filename: (req, file, cb) => {
+//       cb(null,file.originalname);
+//     }
+//   });
 
 const upload = multer({storage : storage}).single("image")
 
