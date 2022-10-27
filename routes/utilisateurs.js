@@ -33,7 +33,18 @@ const validate = [
 
 
 ]
-//api/utilisateurs
+
+const loginValidation = [
+  
+  check('mdp')
+  .isLength({min : 3 , max : 20})
+  .withMessage('le mot de passe doit contenir minimum 8 caractères ! '),
+  check('email')
+  .isEmail().withMessage('email invalide')
+  .isLength({min : 5 })
+  .withMessage('le mot de passe doit contenir minimum 5 caractères ! '),
+  
+]//api/utilisateurs
 // SELECT GET ALL Users
 router.get("/", (req, res) => {
     Utilisateur.find()
@@ -67,7 +78,7 @@ router.post('/',validate , async (req,res)=> {
   const userExist = await Utilisateur.findOne({email : req.body.email})
 
   if (userExist){return res.status(400).send('Email existe déjà ! ')};
-  
+
   const salt = await bcrypt.genSalt();
   const hashPassword = await bcrypt.hash(req.body.mdp, salt)
 
@@ -93,6 +104,32 @@ router.post('/',validate , async (req,res)=> {
     })
     .catch(err => console.log(err))
 })
+
+
+// login User 
+
+router.post('/login',loginValidation, async(req,res)=> {
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ errors: errors.array() });
+  }
+  // verification de l'existance du email 
+  const userSession = await Utilisateur.findOne({email : req.body.email})
+
+  if (!userSession){return res.status(400).send('Utilisateur n\'est pas inscrit ! ')};
+
+  // verification du mot de passe correcte 
+
+  const validPassword = await bcrypt.compare(req.body.mdp , userSession.mdp)
+
+  if (!validPassword) {
+    return res.status(400).send('Email ou mot de passe incorrecte ! ');
+  }
+  res.send('connexion réussite ... ')
+
+})
+
 
 // api/utilisateur 
 
