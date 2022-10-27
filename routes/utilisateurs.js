@@ -81,12 +81,12 @@ router.get("/:_id", (req, res) => {
 //POST
 
 
-router.post('/',validate , async (req,res)=> {
-  const errors = validationResult(req);
+router.post('/' , async (req,res)=> {
+  // const errors = validationResult(req);
 
-  if (!errors.isEmpty()) {
-    return res.status(422).json({ errors: errors.array() });
-  }
+  // if (!errors.isEmpty()) {
+  //   return res.status(422).json({ errors: errors.array() });
+  // }
 
   const userExist = await Utilisateur.findOne({email : req.body.email})
 
