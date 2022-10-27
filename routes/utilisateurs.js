@@ -1,6 +1,7 @@
 const { application } = require("express");
 const express = require("express")
 const {check, validationResult} = require('express-validator')
+const bcrypt = require('bcryptjs')
 const router = express.Router(); 
 
 const Utilisateur = require('../models/Utilisateur')
@@ -56,19 +57,26 @@ router.get("/:_id", (req, res) => {
 //POST
 
 
-router.post('/',validate , (req,res)=> {
+router.post('/',validate , async (req,res)=> {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
     return res.status(422).json({ errors: errors.array() });
   }
 
+  const userExist = await Utilisateur.findOne({email : req.body.email})
+
+  if (userExist){return res.status(400).send('Email existe déjà ! ')};
+  
+  const salt = await bcrypt.genSalt();
+  const hashPassword = await bcrypt.hash(req.body.mdp, salt)
+
     const utilisateur = new Utilisateur({
 
         nom : req.body.nom,
         prenom : req.body.prenom,
         email : req.body.email,
-        mdp : req.body.mdp,
+        mdp : hashPassword,
         tel : req.body.tel,
         adresse : req.body.adresse,
         sexe : req.body.sexe,
