@@ -28,10 +28,10 @@ const validate = [
   .isNumeric().withMessage('doit avoir que des chiffres')
   .isLength({min : 8 , max : 8})
   .withMessage('le tel doit contenir 8 chiffres ! '),
-  check('cp')
-  .isNumeric().withMessage('doit avoir que des chiffres')
-  .isLength({min : 5 , max : 5})
-  .withMessage('le Code Postale doit contenir 5 chiffres ! '),
+  // check('cp')
+  // .isNumeric().withMessage('doit avoir que des chiffres')
+  // .isLength({min : 5 , max : 5})
+  // .withMessage('le Code Postale doit contenir 5 chiffres ! '),
   // check('adresse')
   // .withMessage('ladresse postale doit contenir minimum 5 chiffres ! ')
 
