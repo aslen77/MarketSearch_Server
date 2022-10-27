@@ -1,7 +1,8 @@
 const { application } = require("express");
 const express = require("express")
 const {check, validationResult} = require('express-validator')
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 const router = express.Router(); 
 
 const Utilisateur = require('../models/Utilisateur')
@@ -109,6 +110,8 @@ router.post('/',validate , async (req,res)=> {
 // login User 
 
 router.post('/login',loginValidation, async(req,res)=> {
+
+  // validation input
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
@@ -126,7 +129,11 @@ router.post('/login',loginValidation, async(req,res)=> {
   if (!validPassword) {
     return res.status(400).send('Email ou mot de passe incorrecte ! ');
   }
-  res.send('connexion réussite ... ')
+
+  // creation et affectation du token 
+  const token = jwt.sign({_id : userSession._id, email : userSession.email},'SUPERSECRET123')
+  res.header('auth-token',token).send({message : 'connexion réussite ... ',token})
+  // res.send('connexion réussite ... ')
 
 })
 
