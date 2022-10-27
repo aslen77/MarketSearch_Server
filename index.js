@@ -10,7 +10,6 @@ const administrateurs = require('./routes/administrateurs')
 const categories = require('./routes/categories')
 const scategories = require('./routes/sous_categories')
 const favoris = require('./routes/Favoris')
-// const upload = require("./routes/upload")
 const upload = require("./routes/images")
 app.use(express.json())
 

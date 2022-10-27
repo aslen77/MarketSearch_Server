@@ -4,8 +4,11 @@ const {check, validationResult} = require('express-validator')
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const router = express.Router(); 
-
-const Utilisateur = require('../models/Utilisateur')
+const Utilisateur = require('../models/Utilisateur');
+const verifyToken = require('./verifyToken')
+const generateToken = (userSession) => {
+  return jwt.sign({_id : userSession._id, email : userSession.email, mdp : userSession.mdp},'SUPERSECRET123');
+}
 
 const validate = [
   check('nom')
@@ -45,7 +48,16 @@ const loginValidation = [
   .isLength({min : 5 })
   .withMessage('le mot de passe doit contenir minimum 5 caractères ! '),
   
-]//api/utilisateurs
+]
+
+
+//GET USER TOKEN PROFILE
+
+router.get("/profile",verifyToken,(req,res) => {
+  res.send({success : true , data : req.user , message : "Profil connecte en cours ... "});
+})
+
+//api/utilisateurs
 // SELECT GET ALL Users
 router.get("/", (req, res) => {
     Utilisateur.find()
@@ -78,7 +90,7 @@ router.post('/',validate , async (req,res)=> {
 
   const userExist = await Utilisateur.findOne({email : req.body.email})
 
-  if (userExist){return res.status(400).send('Email existe déjà ! ')};
+  if (userExist){return res.status(400).send({success : false , message : 'Email existe déjà ! ' })};
 
   const salt = await bcrypt.genSalt();
   const hashPassword = await bcrypt.hash(req.body.mdp, salt)
@@ -100,10 +112,11 @@ router.post('/',validate , async (req,res)=> {
     .then(result => {
         res.send({
             message : 'Utilisateur crée avec succès !', 
+            success : true,
             data : result
         })
     })
-    .catch(err => console.log(err))
+    .catch(err => console.log({success : false , error}))
 })
 
 
@@ -120,19 +133,19 @@ router.post('/login',loginValidation, async(req,res)=> {
   // verification de l'existance du email 
   const userSession = await Utilisateur.findOne({email : req.body.email})
 
-  if (!userSession){return res.status(400).send('Utilisateur n\'est pas inscrit ! ')};
+  if (!userSession){return res.status(400).send({success : false , message : 'Utilisateur n\'est pas inscrit ! '})};
 
   // verification du mot de passe correcte 
 
   const validPassword = await bcrypt.compare(req.body.mdp , userSession.mdp)
 
   if (!validPassword) {
-    return res.status(400).send('Email ou mot de passe incorrecte ! ');
+    return res.status(400).send({success : false , message : 'Email ou mot de passe incorrecte ! '});
   }
 
   // creation et affectation du token 
-  const token = jwt.sign({_id : userSession._id, email : userSession.email},'SUPERSECRET123')
-  res.header('auth-token',token).send({message : 'connexion réussite ... ',token})
+  const token = generateToken(userSession);
+  res.header('auth-token',token).send({ success: true, message : 'connexion réussite ... ',token})
   // res.send('connexion réussite ... ')
 
 })
