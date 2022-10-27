@@ -19,7 +19,7 @@ const validate = [
   .withMessage('le prenom doit contenir minimum 3 à 10 caractères ! '),
   check('mdp')
   .isLength({min : 3 , max : 20})
-  .withMessage('le mot de passe doit contenir minimum 8 caractères ! '),
+  .withMessage('le mot de passe doit contenir entre 3 et 20 caractères ! '),
   check('email')
   .isEmail().withMessage('email invalide')
   .isLength({min : 5 })
