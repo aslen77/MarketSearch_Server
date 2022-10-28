@@ -101,10 +101,10 @@ router.post('/' , async (req,res)=> {
         prenom : req.body.prenom,
         email : req.body.email,
         mdp : hashPassword,
-        // tel : req.body.tel,
-        // adresse : req.body.adresse,
-        // sexe : req.body.sexe,
-        // cp : req.body.cp,
+        tel : req.body.tel,
+        adresse : req.body.adresse,
+        sexe : req.body.sexe,
+        cp : req.body.cp,
        
     });
 
