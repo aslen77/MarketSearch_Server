@@ -88,7 +88,7 @@ router.post('/' , async (req,res)=> {
   //   return res.status(422).json({ errors: errors.array() });
   // }
 
-  const userExist = await Utilisateur.findOne({email : req.body.email})
+  const userExist = await Utilisateur.findOne({email : req.body.email.toLowerCase()})
 
   if (userExist){return res.status(400).send({success : false , message : 'Email existe déjà ! ' })};
 
