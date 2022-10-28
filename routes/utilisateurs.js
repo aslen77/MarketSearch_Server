@@ -99,7 +99,7 @@ router.post('/' , async (req,res)=> {
 
         nom : req.body.nom,
         prenom : req.body.prenom,
-        email : req.body.email,
+        email : req.body.email.toLowerCase(),
         mdp : hashPassword,
         tel : req.body.tel,
         adresse : req.body.adresse,
