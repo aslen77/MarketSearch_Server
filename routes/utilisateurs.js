@@ -131,7 +131,7 @@ router.post('/login',loginValidation, async(req,res)=> {
     return res.status(422).json({ errors: errors.array() });
   }
   // verification de l'existance du email 
-  const userSession = await Utilisateur.findOne({email : req.body.email})
+  const userSession = await Utilisateur.findOne({email : req.body.email.toLowerCase()})
 
   if (!userSession){return res.status(400).send({success : false , message : 'Utilisateur n\'est pas inscrit ! '})};
 
