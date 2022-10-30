@@ -59,7 +59,7 @@ router.get("/profile",verifyToken,(req,res) => {
 
 //api/utilisateurs
 // SELECT GET ALL Users
-router.get("/", (req, res) => {
+router.get("/all", (req, res) => {
     Utilisateur.find()
       .then((Utilisateur) => {
         res.send(Utilisateur);
