@@ -8,7 +8,7 @@ const UtilisateurSchema = new mongoose.Schema({
     tel : {type : Number, required : true}, 
     sexe : {type : String, required : true}, 
     adresse : String, 
-    cp : Number, 
+    cp : String, 
 
 })
 
