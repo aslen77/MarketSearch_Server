@@ -154,15 +154,17 @@ router.post('/login',loginValidation, async(req,res)=> {
 // api/utilisateur 
 
 // Update 
-router.put('/:_id',(req,res) =>{
+router.put('/:_id',async(req,res) =>{
   const idUser = req.params._id
+  const salt = await bcrypt.genSalt();
+  const hashPassword = await bcrypt.hash(req.body.mdp, salt)
 
   Utilisateur.findById(idUser)
     .then(utilisateur => {
        utilisateur.nom = req.body.nom;
         utilisateur.prenom = req.body.prenom;
         utilisateur.email = req.body.email;
-        utilisateur.mdp = req.body.mdp;
+        utilisateur.mdp = hashPassword;
         utilisateur.tel = req.body.tel;
         utilisateur.adresse = req.body.adresse;
         utilisateur.sexe = req.body.sexe;
