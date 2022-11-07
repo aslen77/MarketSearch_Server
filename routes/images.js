@@ -28,17 +28,10 @@ const storage = new CloudinaryStorage({
   },
 });
 
-// const storage = multer.diskStorage({
-//     destination: "uploads",
-//     filename: (req, file, cb) => {
-//       cb(null,file.originalname);
-//     }
-//   });
+
 
 const upload = multer({storage : storage}).single("image")
 
-
-//
 // afficher tous les images pour l'accueil
 router.get("/upload/", (req, res) => {
   Image.find()
