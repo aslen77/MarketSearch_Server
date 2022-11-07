@@ -14,18 +14,14 @@ const { CloudinaryStorage } = require("multer-storage-cloudinary");
 
 
 const multer = require("multer");
+
 cloudinary.config({
   cloud_name: "drd94tfnw",
   api_key: "317625455142781",
   api_secret: "S1ry3yZPsNJDYO6oqpEawcEV4RU",
 });
 
-// const storage = multer.diskStorage({
-//   destination: "cliparts",
-//   filename: (req, file, cb) => {
-//     cb(null,file.originalname);
-//   }
-// });
+
 
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,

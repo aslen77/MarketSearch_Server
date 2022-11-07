@@ -9,13 +9,22 @@ const app = express()
 
 const path = require('path')
 const fs = require('fs');
+const cloudinary = require("cloudinary").v2;
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
 
 const multer = require("multer");
-const storage = multer.diskStorage({
-  destination: "cliparts",
-  filename: (req, file, cb) => {
-    cb(null,file.originalname);
-  }
+
+cloudinary.config({
+  cloud_name: "drd94tfnw",
+  api_key: "317625455142781",
+  api_secret: "S1ry3yZPsNJDYO6oqpEawcEV4RU",
+});
+
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: "MarketSearch_cliparts",
+  },
 });
 const upload = multer({storage : storage}).single("clipart")
 
@@ -29,6 +38,19 @@ router.get("/", (req, res) => {
       })
       .catch((err) => console.log(err));
   });
+
+// SELECT BY ID CATEGORIE 
+
+router.get("/byCtg/:_idCategorie", (req, res) => {
+  const _idCategorie = req.params._idCategorie
+  Scategorie.find({_idCategorie: _idCategorie})
+    .then((Scategorie) => {
+      res.send(Scategorie);
+    })
+    .catch((err) => console.log(err));
+});
+
+
 //SELECT GET BY ID 
 router.get("/:_id", (req, res) => {
     const idScategorie = req.params._id
