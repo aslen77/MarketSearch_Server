@@ -50,6 +50,17 @@ router.get("/:_id", (req, res) => {
       .catch((err) => console.log(err));
   });
 
+  //SELECT GET BY nom_categorie 
+router.get("/nom_ctg/:nom_categorie", (req, res) => {
+  const nom_categorie = req.params.nom_categorie
+  Categorie.find({nom_categorie : nom_categorie})
+    .then((Categorie) => {
+      res.send(Categorie);
+    })
+    .catch((err) => console.log(err));
+});
+  
+
 
   //POST
   router.post('/', (req,res)=> {

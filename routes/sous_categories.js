@@ -4,6 +4,7 @@ const express = require("express")
 const router = express.Router(); 
 
 const Scategorie = require('../models/SousCategorie')
+const Categorie = require('../models/Categories')
 
 const app = express()
 
@@ -49,6 +50,8 @@ router.get("/byCtg/:_idCategorie", (req, res) => {
     })
     .catch((err) => console.log(err));
 });
+
+
 
 
 //SELECT GET BY ID 
