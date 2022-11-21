@@ -22,6 +22,10 @@ const ProduitSchema = new mongoose.Schema({
          univer : String, 
          pointure : Number,
          matiere : String, 
+         typeSac : String, 
+         typeBijoux : String,
+         typeChauss : String
+
       }, 
       vehicule : {
          marque : String,
