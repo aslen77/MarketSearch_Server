@@ -117,6 +117,8 @@ router.get("/:_id", (req, res) => {
     })
     .catch((err) => console.log(err))
     });
+
+
   //POST
   router.post('/', (req,res)=> {
     var codes = generator.generateCodes(pattern, howMany);
@@ -199,4 +201,18 @@ router.delete('/:_id',(req,res) => {
       })
       .catch(err => console.log(err))
   })
+
+
+
+//GET LAST PRODUCT PUBLISHED CODE JNT 
+
+router.get("/lastOne/:id_vendeur", (req,res) => { 
+  const id_vendeur = req.params.id_vendeur;
+  Produit.find({id_vendeur : id_vendeur},{codejnt : 1}).sort({_id : -1}).limit(1)
+    .then((result) => {
+      res.send(result);
+    })
+    .catch((err) => console.log(err));
+})
+
 module.exports = router;
