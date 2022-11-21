@@ -16,7 +16,7 @@ const ProduitSchema = new mongoose.Schema({
       vetement : {
          typeVet : String, 
          taille : String, 
-         marque : String, 
+         marqueMode : String, 
          CouleurMode : String,
          Etat : Number, 
          univer : String, 
@@ -28,7 +28,7 @@ const ProduitSchema = new mongoose.Schema({
 
       }, 
       vehicule : {
-         marque : String,
+         marqueVehicule : String,
          modele : String, 
          annee_modele : Number,
          carburant : String, 
