@@ -105,13 +105,24 @@ router.get("/:_id", (req, res) => {
     // AGGREGATION WITH MATCH BY Titre
     router.get("/aggreg/produit/findProduct/:titre", (req, res) => {
       const titre = req.params.titre
-      Produit.aggregate(([{$lookup: {
+      Produit.aggregate(([
+        {
+          $match: {
+            $text: {
+                $search: titre
+            }
+        }
+        },
+        {$lookup: {
         from: "images",
         localField: "codejnt",
         foreignField: "codejnt",
         as: "details_jointure",
     }
-  },  {$match: { titre : titre}}]))
+  },  
+ 
+
+]))
     .then((Produit) => { 
         res.send(Produit)
     })
