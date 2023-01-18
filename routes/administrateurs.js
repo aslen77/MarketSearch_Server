@@ -120,7 +120,7 @@ router.post('/login',loginValidation, async(req,res)=> {
   // verification de l'existance du email 
   const userSession = await Administrateur.findOne({email : req.body.email.toLowerCase()})
 
-  if (!userSession){return res.status(400).send({success : false , message : 'Utilisateur n\'est pas inscrit ! '})};
+  if (!userSession){return res.status(400).send({success : false , message : 'Administrateur n\'est pas inscrit ! '})};
 
   // verification du mot de passe correcte 
 
