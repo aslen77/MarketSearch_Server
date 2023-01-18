@@ -70,7 +70,7 @@ router.get("/", (req, res) => {
 
   
 
-// api/utilisateurs
+// api/admin
 //POST
 
 
@@ -107,7 +107,7 @@ router.post('/' , async (req,res)=> {
 })
 
 
-// login User 
+// login Administrateur 
 
 router.post('/login',loginValidation, async(req,res)=> {
 
@@ -137,53 +137,7 @@ router.post('/login',loginValidation, async(req,res)=> {
 })
 
 
-// api/utilisateur 
 
-// Update 
-router.put('/:_id',async(req,res) =>{
-  const idUser = req.params._id
-  const salt = await bcrypt.genSalt();
-  const hashPassword = await bcrypt.hash(req.body.mdp, salt)
-
-  Utilisateur.findById(idUser)
-    .then(utilisateur => {
-       utilisateur.nom = req.body.nom;
-        utilisateur.prenom = req.body.prenom;
-        utilisateur.email = req.body.email;
-        utilisateur.mdp = hashPassword;
-        utilisateur.tel = req.body.tel;
-        utilisateur.adresse = req.body.adresse;
-        utilisateur.sexe = req.body.sexe;
-        utilisateur.cp = req.body.cp;
-
-        return utilisateur.save();
-    })
-    .then(result => {
-      res.send({
-          message : 'Utilisateur modifié avec succès !', 
-          data : result
-      })
-  })
-    .catch(err => console.log(err))
-
-})
-
-// api/utilisateur 
-
-//Delete
-
-router.delete('/:_id',(req,res) => {
-  const idUser = req.params._id
-
-  Utilisateur.findByIdAndRemove(idUser)
-  .then(result => {
-    res.send({
-        message : 'Utilisateur supprimé avec succès !', 
-        data : result
-    })
-})
-  .catch(err => console.log(err))
-})
 
 
 module.exports = router;
