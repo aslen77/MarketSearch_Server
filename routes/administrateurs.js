@@ -133,7 +133,6 @@ router.post('/login',loginValidation, async(req,res)=> {
   // creation et affectation du token 
   const token = generateToken(userSession);
   res.header('auth-token',token).send({ success: true, message : 'connexion réussite ... ',token})
-  // res.send('connexion réussite ... ')
 
 })
 
